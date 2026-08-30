@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - Iniciar sesión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- left: Logo, título y mockup de teléfono -->
+        <div class="left-section">
+            <div class="logo-wrapper">
+                <img src="images/logo-instagram.png" alt="Logo Instagram" class="logo">
+            </div>
+
+            <h1 class="main-title">
+                Mira los momentos cotidianos de tus
+                <span class="highlight">mejores amigos</span>.
+            </h1>
+
+            <!-- Mockup del teléfono con carousel de historias -->
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-content">
+                    <div class="carousel">
+                        <img src="https://static.cdninstagram.com/rsrc.php/yR/r/92ZsVHNkyvf.webp" alt="Historia 1" class="carousel-image active">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- right: Formulario de login -->
+        <div class="right-section">
+            <div class="form-card">
+                <h2 class="form-title">Iniciar sesión en Instagram</h2>
+
+                <form class="login-form" id="loginForm">
+                    <!-- Campo: Usuario/Email/Teléfono -->
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Número de celular, nombre de usuario o correo electrónico"
+                            class="form-input"
+                            required
+                        >
+                        <span class="error-message" id="usernameError"></span>
+                    </div>
+
+                    <!-- Campo: Contraseña -->
+                    <div class="form-group">
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Contraseña"
+                                class="form-input"
+                                required
+                            >
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                id="togglePassword"
+                            >
+                                <img src="images/icon-eye.png" alt="Ver contraseña" class="eye-icon">
+                            </button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <!-- Botón de login -->
+                    <button type="submit" class="login-btn">
+                        Iniciar sesión
+                    </button>
+                </form>
+
+                <!-- Divider "O" -->
+                <div class="divider">
+                    <span>O</span>
+                </div>
+
+                <!-- Login con Facebook -->
+                <button class="facebook-login-btn">
+                    <img src="images/icon-facebook.png" alt="Facebook" class="social-icon">
+                    Iniciar sesión con Facebook
+                </button>
+
+                <!-- Enlace para recuperar contraseña -->
+                <div class="forgot-password-section">
+                    <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <!-- Divider con líneas -->
+                <div class="divider-full">
+                    <span class="line"></span>
+                    <span class="divider-text">O</span>
+                    <span class="line"></span>
+                </div>
+
+                <!-- Sección de registro -->
+                <div class="signup-section">
+                    <p>¿No tienes cuenta? <a href="#" class="signup-link">Regístrate</a></p>
+                </div>
+            </div>
+
+            <!-- Footer con links meta -->
+            <div class="footer-links">
+                <a href="#">Meta</a>
+                <a href="#">Acerca de</a>
+                <a href="#">Blog</a>
+                <a href="#">Empleo</a>
+                <a href="#">Ayuda</a>
+                <a href="#">API</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script principal -->
+    <script src="main.js"></script>
+</body>
+</html>
