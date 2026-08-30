@@ -39,7 +39,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== Split 2 columnas (como Instagram) ===== */
+/* ===== Split 2 columnas (desktop) ===== */
 .page {
   flex: 1;
   display: grid;
@@ -48,7 +48,12 @@ body {
   min-height: 0;
 }
 
-/* ----- Izquierda ----- */
+/* Logo solo móvil (oculto en desktop) */
+.mobile-logo {
+  display: none;
+}
+
+/* ----- Izquierda (solo desktop) ----- */
 .left {
   background: var(--bg-left);
   display: flex;
@@ -161,7 +166,6 @@ body {
   border-color: var(--input-border-focus);
 }
 
-/* Label flotante */
 .field label {
   position: absolute;
   left: 16px;
@@ -177,7 +181,6 @@ body {
   max-width: calc(100% - 48px);
 }
 
-/* Cuando hay focus o tiene valor, el label sube */
 .field input:focus + label,
 .field input:not(:placeholder-shown) + label,
 .field input.has-value + label {
@@ -187,12 +190,10 @@ body {
   color: var(--text-muted);
 }
 
-/* Ocultamos placeholder nativo (usamos label) */
 .field input::placeholder {
   color: transparent;
 }
 
-/* Password: espacio para el ojo */
 .field:has(.toggle-pw) input {
   padding-right: 44px;
 }
@@ -217,7 +218,6 @@ body {
   color: #ccc;
 }
 
-/* Botones */
 .btn-primary {
   width: 100%;
   height: 48px;
@@ -344,63 +344,85 @@ body {
   text-decoration: underline;
 }
 
-/* Responsive */
+/* ============================================
+   MÓVIL / TABLET: solo formulario (como IG)
+   ============================================ */
 @media (max-width: 960px) {
+  body {
+    background: var(--bg-right);
+  }
+
   .page {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
+  /* Ocultar branding + mockup */
   .left {
-    padding: 40px 24px 28px;
+    display: none !important;
+  }
+
+  /* Logo centrado arriba (solo móvil) */
+  .mobile-logo {
+    display: flex;
     justify-content: center;
-  }
-
-  .left-inner {
     align-items: center;
-    text-align: center;
+    padding: 48px 20px 32px;
+    background: var(--bg-left);
+    border-bottom: 1px solid var(--divider);
   }
 
-  .ig-logo {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .headline {
-    font-size: 28px;
-    margin-bottom: 32px;
-  }
-
-  .phones {
-    max-width: 300px;
-    margin: 0 auto;
+  .mobile-logo img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
   }
 
   .right {
     border-left: none;
-    border-top: 1px solid var(--divider);
+    border-top: none;
+    flex: 1;
+    align-items: flex-start;
     padding: 40px 24px 48px;
+    background: var(--bg-right);
   }
 
   .login-box {
     margin: 0 auto;
+    max-width: 360px;
+  }
+
+  .footer {
+    background: var(--bg-right);
+    border-top: 1px solid #222;
   }
 }
 
 @media (max-width: 480px) {
-  .left {
-    padding: 32px 20px 20px;
+  .mobile-logo {
+    padding: 40px 16px 28px;
   }
 
-  .headline {
-    font-size: 24px;
-  }
-
-  .phones {
-    max-width: 260px;
+  .mobile-logo img {
+    width: 48px;
+    height: 48px;
   }
 
   .right {
-    padding: 32px 20px 40px;
+    padding: 28px 20px 40px;
+  }
+
+  .login-box {
+    max-width: 100%;
+  }
+
+  .footer-nav {
+    gap: 4px 10px;
+  }
+
+  .footer-nav a {
+    font-size: 11px;
   }
 }
 
