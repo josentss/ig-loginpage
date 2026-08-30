@@ -1,11 +1,6 @@
-/* ============================================
-   Instagram Login – dark (refinado al pixel)
-   ============================================ */
-
 :root {
   --bg-left: #000000;
   --bg-right: #1a1a1a;
-  --input-bg: transparent;
   --input-border: #3a3a3a;
   --input-border-hover: #555;
   --input-border-focus: #8e8e8e;
@@ -44,44 +39,45 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== Split layout ===== */
+/* ===== Split 2 columnas (como Instagram) ===== */
 .page {
   flex: 1;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  min-height: 0;
+  grid-template-columns: 1.2fr 0.8fr;
   width: 100%;
+  min-height: 0;
 }
 
-/* ===== LEFT ===== */
+/* ----- Izquierda ----- */
 .left {
   background: var(--bg-left);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 60px 48px 60px 80px;
+  padding: 48px 40px 48px 64px;
 }
 
-.brand {
+.left-inner {
+  max-width: 520px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 36px;
 }
 
 .ig-logo {
   width: 52px;
   height: 52px;
   object-fit: contain;
-  display: block;
+  margin-bottom: 36px;
 }
 
 .headline {
-  font-size: clamp(30px, 3.4vw, 40px);
+  font-size: clamp(28px, 3.2vw, 40px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #ffffff;
-  max-width: 520px;
+  color: #fff;
+  margin-bottom: 48px;
 }
 
 .headline .line1 {
@@ -89,7 +85,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #f58529 0%, #dd2a7b 50%, #c13584 100%);
+  background: linear-gradient(90deg, #f58529 0%, #dd2a7b 55%, #c13584 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -97,8 +93,7 @@ body {
 }
 
 .phones {
-  margin-top: 48px;
-  max-width: 380px;
+  max-width: 360px;
   width: 100%;
 }
 
@@ -111,21 +106,19 @@ body {
   user-select: none;
 }
 
-/* ===== RIGHT ===== */
+/* ----- Derecha ----- */
 .right {
   background: var(--bg-right);
   border-left: 1px solid var(--divider);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 56px;
+  padding: 48px 40px;
 }
 
 .login-box {
   width: 100%;
   max-width: 340px;
-  display: flex;
-  flex-direction: column;
 }
 
 .login-title {
@@ -135,7 +128,7 @@ body {
   margin-bottom: 22px;
 }
 
-/* Form */
+/* Form + floating labels */
 .form {
   display: flex;
   flex-direction: column;
@@ -148,21 +141,16 @@ body {
 
 .field input {
   width: 100%;
-  height: 48px;
-  padding: 0 16px;
+  height: 52px;
+  padding: 18px 16px 6px;
   background: transparent;
   border: 1px solid var(--input-border);
-  border-radius: 24px; /* pill-ish como el original */
+  border-radius: 26px;
   color: var(--text);
   font-size: 14px;
   font-family: inherit;
   outline: none;
   transition: border-color 0.15s ease;
-}
-
-.field input::placeholder {
-  color: var(--text-muted);
-  font-size: 13.5px;
 }
 
 .field input:hover {
@@ -173,6 +161,38 @@ body {
   border-color: var(--input-border-focus);
 }
 
+/* Label flotante */
+.field label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  pointer-events: none;
+  transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 48px);
+}
+
+/* Cuando hay focus o tiene valor, el label sube */
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field input.has-value + label {
+  top: 12px;
+  transform: translateY(0);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Ocultamos placeholder nativo (usamos label) */
+.field input::placeholder {
+  color: transparent;
+}
+
+/* Password: espacio para el ojo */
 .field:has(.toggle-pw) input {
   padding-right: 44px;
 }
@@ -190,13 +210,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .toggle-pw:hover {
   color: #ccc;
 }
 
-/* Login button */
+/* Botones */
 .btn-primary {
   width: 100%;
   height: 48px;
@@ -222,7 +243,6 @@ body {
   cursor: default;
 }
 
-/* Forgot */
 .forgot {
   display: block;
   text-align: center;
@@ -236,7 +256,6 @@ body {
   opacity: 0.75;
 }
 
-/* Facebook */
 .btn-facebook {
   width: 100%;
   height: 48px;
@@ -266,7 +285,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Create account */
 .btn-outline {
   width: 100%;
   height: 48px;
@@ -285,7 +303,6 @@ body {
   background: rgba(0, 149, 246, 0.08);
 }
 
-/* Meta */
 .meta-logo {
   display: flex;
   justify-content: center;
@@ -298,7 +315,7 @@ body {
   opacity: 0.9;
 }
 
-/* ===== Footer ===== */
+/* Footer */
 .footer {
   flex-shrink: 0;
   padding: 16px 24px 20px;
@@ -327,31 +344,35 @@ body {
   text-decoration: underline;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 960px) {
   .page {
     grid-template-columns: 1fr;
   }
 
   .left {
-    padding: 40px 28px 28px;
+    padding: 40px 24px 28px;
+    justify-content: center;
+  }
+
+  .left-inner {
     align-items: center;
     text-align: center;
   }
 
-  .brand {
-    align-items: center;
+  .ig-logo {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .headline {
     font-size: 28px;
+    margin-bottom: 32px;
   }
 
   .phones {
     max-width: 300px;
-    margin-top: 32px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
   }
 
   .right {
@@ -384,5 +405,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  .field label {
+    transition: none;
+  }
 }
